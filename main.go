@@ -2,18 +2,26 @@ package main
 
 import (
 	"fmt"
+	"github.com/hristo-ganekov-sumup/design-patterns-examples/singleton"
 	"github.com/hristo-ganekov-sumup/design-patterns-examples/visitor"
 )
 
 
 func main() {
-	square := &square{side: 2}
-	circle := &circle{radius: 3}
-	rectangle := &rectangle{l: 2, b: 3}
+	//Visitor
+	square := &visitor.Square{Side: 2}
+	circle := &visitor.Circle{Radius: 3}
+	rectangle := &visitor.Rectangle{L: 2, B: 3}
 
-	areaCalculator := &areaCalculator{}
+	areaCalculator := &visitor.AreaCalculator{}
 
-	square.accept(areaCalculator)
-	circle.accept(areaCalculator)
-	rectangle.accept(areaCalculator)
+	square.Accept(areaCalculator)
+	circle.Accept(areaCalculator)
+	rectangle.Accept(areaCalculator)
 
+	//Singleton
+	for i := 0; i < 3; i++ {
+		go singleton.GetInstance()
+	}
+	fmt.Scanln()
+}
