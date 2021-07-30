@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/hristo-ganekov-sumup/design-patterns-examples/singleton"
-	"github.com/hristo-ganekov-sumup/design-patterns-examples/visitor"
+	"github.com/hristo-ganekov-sumup/design-patterns-examples/internal/singleton"
+	"github.com/hristo-ganekov-sumup/design-patterns-examples/internal/visitor"
+	"github.com/hristo-ganekov-sumup/design-patterns-examples/internal/simplefactory"
 )
 
 
@@ -24,4 +25,18 @@ func main() {
 		go singleton.GetInstance()
 	}
 	fmt.Scanln()
+
+	//SimpleFactory
+	ak47, _ := simplefactory.GetGun("ak47")
+	musket, _ := simplefactory.GetGun("musket")
+
+	printDetails(ak47)
+	printDetails(musket)
+}
+
+func printDetails(g simplefactory.IGun) {
+	fmt.Printf("Gun: %s", g.GetName())
+	fmt.Println()
+	fmt.Printf("Power: %d", g.GetPower())
+	fmt.Println()
 }
